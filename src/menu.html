@@ -1,0 +1,44 @@
+<html>
+<head>
+    <title>[[title]]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            box-sizing: content-box;
+        }
+        .button {
+            background: cornflowerblue;
+            padding-top: 16px;
+            padding-bottom: 16px;
+            width: 100%;
+            display: block;
+            margin-top: 16px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        .button:active {
+            background: dodgerblue;
+        }
+    </style>
+</head>
+<body style="width: 100%;text-align:center;    background: rgb(240,240,240);">
+<div style="display: block; width: 100%; max-width: 300px; margin: auto;">
+    <h1 style="width: 100%;font-size:3em;display: block;margin-top:8px;margin-bottom:8px;">[[title]]</h1>
+    <a class="button" href="/kill_frozen">Kill all frozen programs</a>
+    <a class="button" href="/kill_foreground">Kill foreground program</a>
+</div>
+<p style="width: 100%; max-width: 300px; padding-top: 16px; color: red; margin: auto;" id="err_text"></p>
+<script>
+    const error = "[[error_text]]";
+    window.onload = () => {
+        if (error != "") {
+            document.getElementById("err_text").innerText = error;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+[package]
+name = "nuc_remote"
+version = "0.1.0"
+edition = "2021"
+description = "Program for remotely controlling computers"
+authors = ["Ray Britton <raybritton@pm.me>"]
+license-file = "LICENSE"
+readme = "README.md"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-web = "4.1.0"
+lazy_static = "1.4.0"
+
+[dependencies.windows]
+version = "0.38.0"
+features = [
+    "Win32_Foundation",
+    "Win32_UI_WindowsAndMessaging",
+]
