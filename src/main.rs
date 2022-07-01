@@ -1,6 +1,7 @@
+#![windows_subsystem = "windows"]
 mod methods;
 
-use crate::methods::{kill_foreground, shutdown};
+use crate::methods::kill_foreground;
 use actix_web::{get, App, HttpResponse, HttpServer, Responder};
 use lazy_static::lazy_static;
 use std::env::args;
