@@ -1,0 +1,46 @@
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build_and_release:
+    name: Build and Release
+    needs: test
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - x86_64-pc-windows-msvc
+        include:
+          - target: x86_64-pc-windows-msvc
+            os: windows-latest
+            command: build
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: ${{ matrix.target }}
+          override: true
+
+      - uses: actions-rs/cargo@v1
+        with:
+          use-cross: true
+          command: ${{ matrix.command }}
+          args: --release --target=${{ matrix.target }}
+
+      - name: Prepare build artifacts [Windows]
+        if: matrix.os == 'windows-latest'
+        run: |
+          cd target/${{ matrix.target }}/release
+          strip nuc_remote.exe
+          copy nuc_remote.exe ../../../nuc_remote.exe
+          cd ../../..
+      - uses: softprops/action-gh-release@v1
+        with:
+          files: nuc_remote.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
