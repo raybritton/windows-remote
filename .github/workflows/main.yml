@@ -6,7 +6,6 @@ on:
 jobs:
   build_and_release:
     name: Build and Release
-    needs: test
     strategy:
       fail-fast: false
       matrix:
